@@ -8,26 +8,24 @@ title and body input fields are cleared
 page should not reload when input fields are cleared*/
 
 
-//function to stringify
+var ideaList = [];
 
 
 function addIdeaToPage(ideaTitle, ideaBody) {
-  var ideaVariable = ('<div id=' + Date.now() + ' class="container"><h2 class="ideaTitle">' + ideaTitle + '</h2><button>delete</button><p class ="ideaBody">' + ideaBody + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
+  var ideaVariable = ('<div id=' + Date.now() + ' class="container"><h2 class="ideaTitle">' + ideaTitle + '</h2><button>delete</button><p class="ideaBody">' + ideaBody + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
+  var newIdea = JSON.stringify(ideaVariable);
 
-  $('.ideaList').prepend (ideaVariable);
 
-  JSON.stringify(ideaVariable);
+  ideaList.push(newIdea);
+
+
+
+  $('.ideaList').prepend(ideaVariable);
+
   // var stringifiedIdea = JSON.stringify(ideaVariable);
-  localStorage.setItem('ideaKey', ideaVariable);
+  localStorage.setItem('ideaKey', ideaList);
 };
 
-// $("#idea-list").load(function() {
-//   var object = localStorage.getItem('ideaKey')
-//   JSON.parse(object);
-//   localStorage.getItem('ideaKey');
-});
-
-// JSON.parse(localStorage.getItem('ideaKey'));
 
 function clearInputFields(){
   $('#title-input').val('');
