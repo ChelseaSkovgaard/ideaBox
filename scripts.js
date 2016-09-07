@@ -9,7 +9,7 @@ page should not reload when input fields are cleared*/
 
 
 function addIdeaToPage(ideaTitle, ideaBody) {
-  $('.ideaList').append ('<div class="container"><h2 class="ideaTitle">' + ideaTitle + '</h2><button>delete</button><p class ="ideaBody">' + ideaBody + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
+  $('.ideaList').append ('<div id=' + Date.now() + ' class="container"><h2 class="ideaTitle">' + ideaTitle + '</h2><button>delete</button><p class ="ideaBody">' + ideaBody + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
 };
 
 //event lister save button
