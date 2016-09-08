@@ -8,25 +8,45 @@ title and body input fields are cleared
 page should not reload when input fields are cleared*/
 
 
-var ideaList = [];
+var ideaList = getIdeaList() || [];
 
 
-function addIdeaToPage(ideaTitle, ideaBody) {
 
+function Idea (title, body, id) {
+  this.title = title;
+  this.body = body;
+  this.id = id || Date.now();
+}
 
-  var ideaVariable = ([Date.now(), ideaTitle, ideaBody]);
-  var newIdea = JSON.stringify(ideaVariable);
-
-  ideaList.push(newIdea);
-
-
-  $('.ideaList').prepend('<div id=' + Date.now() + ' class="container"><h2 class="ideaTitle">' + ideaTitle + '</h2><button>delete</button><p class="ideaBody">' + ideaBody + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
-
-  // var stringifiedIdea = JSON.stringify(ideaVariable);
-  // localStorage.setItem('ideaKey', ideaList);
-  localStorage.setItem('ideaKey', ideaList);
+Idea.prototype.renderOnPage = function() {
+  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button>delete</button><p class="ideaBody">' + this.body + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
 };
 
+function renderIdeasInArray() {
+  ideaList.forEach(function(idea) {
+    var idea = new Idea(idea.title, idea.body, idea.id)
+    idea.renderOnPage();
+  });
+};
+
+//renders ideas in array on page load
+renderIdeasInArray();
+
+function addIdeaToPage(ideaTitle, ideaBody) {
+  var idea = new Idea(ideaTitle, ideaBody);
+  ideaList.push(idea);
+  idea.renderOnPage();
+};
+
+//function to save item in local storage
+function saveIdeaList() {
+  localStorage.setItem('ideaKey', JSON.stringify(ideaList));
+};
+
+//function to get parsed JSON in local storage
+function getIdeaList() {
+  return JSON.parse(localStorage.getItem('ideaKey'));
+};
 
 function clearInputFields(){
   $('#title-input').val('');
@@ -38,5 +58,13 @@ $('#save-btn').on('click', function() {
   var ideaTitle = $('#title-input').val();
   var ideaBody = $('#body-input').val();
   addIdeaToPage(ideaTitle, ideaBody);
+  saveIdeaList();
   clearInputFields();
 });
+
+
+//get ideas out of storage on page load
+// window.onload = function() {
+//   ideaList = getIdeaList() || [] ;
+//   console.log(ideaList)
+// }
