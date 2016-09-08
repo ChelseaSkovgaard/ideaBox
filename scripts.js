@@ -12,17 +12,18 @@ var ideaList = [];
 
 
 function addIdeaToPage(ideaTitle, ideaBody) {
-  var ideaVariable = ('<div id=' + Date.now() + ' class="container"><h2 class="ideaTitle">' + ideaTitle + '</h2><button>delete</button><p class="ideaBody">' + ideaBody + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
-  var newIdea = JSON.stringify(ideaVariable);
 
+
+  var ideaVariable = ([Date.now(), ideaTitle, ideaBody]);
+  var newIdea = JSON.stringify(ideaVariable);
 
   ideaList.push(newIdea);
 
 
-
-  $('.ideaList').prepend(ideaVariable);
+  $('.ideaList').prepend('<div id=' + Date.now() + ' class="container"><h2 class="ideaTitle">' + ideaTitle + '</h2><button>delete</button><p class="ideaBody">' + ideaBody + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
 
   // var stringifiedIdea = JSON.stringify(ideaVariable);
+  // localStorage.setItem('ideaKey', ideaList);
   localStorage.setItem('ideaKey', ideaList);
 };
 
