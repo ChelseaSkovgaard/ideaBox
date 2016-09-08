@@ -78,8 +78,7 @@ $('.ideaList').on('click', '.deleteButton', function(){
 
  //event listener up button
  $('.ideaList').on('click', '.up-arrow', function(){
-   debugger
-   if ($(this).parent().idea-quality.text === 'swill') {
+   if ($(this).parent().children('.idea-quality').text() === 'swill') {
      $('.idea-quality').innerText('plausible');
    }
  });
