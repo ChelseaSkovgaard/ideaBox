@@ -16,7 +16,7 @@ function Idea (title, body, id) {
 }
 
 Idea.prototype.renderOnPage = function() {
-  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button class="deleteButton">delete</button><p class="ideaBody">' + this.body + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
+  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button class="deleteButton">delete</button><p class="ideaBody">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="ideaQuality">swill</p></div>');
 };
 
 function renderIdeasInArray() {
@@ -63,5 +63,15 @@ $('#save-btn').on('click', function() {
 
 //event listener delete button
 $('.ideaList').on('click', '.deleteButton', function(){
+    var ideaId = $(this).parent().attr('id');
+    removeFromStorage(ideaId);
    $(this).parent().remove();
  });
+
+ function removeFromStorage(id) {
+   id = parseInt(id);
+    ideaList = ideaList.filter(function(i) {
+      return i.id !== id;
+    });
+    saveIdeaList();
+ }
