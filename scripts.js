@@ -7,10 +7,7 @@ title and body text need to go into local storage
 title and body input fields are cleared
 page should not reload when input fields are cleared*/
 
-
 var ideaList = getIdeaList() || [];
-
-
 
 function Idea (title, body, id) {
   this.title = title;
@@ -19,12 +16,12 @@ function Idea (title, body, id) {
 }
 
 Idea.prototype.renderOnPage = function() {
-  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button>delete</button><p class="ideaBody">' + this.body + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
+  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button class="deleteButton">delete</button><p class="ideaBody">' + this.body + '</p><button>uparrow</button><button>downarrow</button><p class="ideaQuality">swill</p></div>');
 };
 
 function renderIdeasInArray() {
   ideaList.forEach(function(idea) {
-    var idea = new Idea(idea.title, idea.body, idea.id)
+    var idea = new Idea(idea.title, idea.body, idea.id);
     idea.renderOnPage();
   });
 };
@@ -37,6 +34,7 @@ function addIdeaToPage(ideaTitle, ideaBody) {
   ideaList.push(idea);
   idea.renderOnPage();
 };
+
 
 //function to save item in local storage
 function saveIdeaList() {
@@ -57,14 +55,13 @@ function clearInputFields(){
 $('#save-btn').on('click', function() {
   var ideaTitle = $('#title-input').val();
   var ideaBody = $('#body-input').val();
-  addIdeaToPage(ideaTitle, ideaBody);
+  var deleteButton = $('.deleteButton');
+  addIdeaToPage(ideaTitle, ideaBody, deleteButton);
   saveIdeaList();
   clearInputFields();
 });
 
-
-//get ideas out of storage on page load
-// window.onload = function() {
-//   ideaList = getIdeaList() || [] ;
-//   console.log(ideaList)
-// }
+//event listener delete button
+$('.ideaList').on('click', '.deleteButton', function(){
+   $(this).parent().remove();
+ });
