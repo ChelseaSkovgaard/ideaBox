@@ -79,6 +79,9 @@ $('.ideaList').on('click', '.deleteButton', function(){
  //event listener up button
  $('.ideaList').on('click', '.up-arrow', function(){
    if ($(this).parent().children('.idea-quality').text() === 'swill') {
-     $('.idea-quality').innerText('plausible');
+     $('.idea-quality').text('plausible');
    }
+   else if ($(this).parent().children('.idea-quality').text() === 'plausible') {
+       $('.idea-quality').text('genius');
+       }
  });
