@@ -9,19 +9,20 @@ page should not reload when input fields are cleared*/
 
 var ideaList = getIdeaList() || [];
 
-function Idea (title, body, id) {
+function Idea (title, body, id, quality) {
   this.title = title;
   this.body = body;
   this.id = id || Date.now();
+  this.quality = quality || 'swill';
 }
 
 Idea.prototype.renderOnPage = function() {
-  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button class="deleteButton">delete</button><p class="ideaBody">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">swill</p></div>');
+  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button class="deleteButton">delete</button><p class="ideaBody">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">' + this.quality + '</p></div>');
 };
 
 function renderIdeasInArray() {
   ideaList.forEach(function(idea) {
-    var idea = new Idea(idea.title, idea.body, idea.id);
+    var idea = new Idea(idea.title, idea.body, idea.id, idea.quality);
     idea.renderOnPage();
   });
 };
@@ -29,8 +30,8 @@ function renderIdeasInArray() {
 //renders ideas in array on page load
 renderIdeasInArray();
 
-function addIdeaToPage(ideaTitle, ideaBody) {
-  var idea = new Idea(ideaTitle, ideaBody);
+function addIdeaToPage(ideaTitle, ideaBody, ideaQuality) {
+  var idea = new Idea(ideaTitle, ideaBody, ideaQuality);
   ideaList.push(idea);
   idea.renderOnPage();
 };
@@ -55,8 +56,8 @@ function clearInputFields(){
 $('#save-btn').on('click', function() {
   var ideaTitle = $('#title-input').val();
   var ideaBody = $('#body-input').val();
-  var deleteButton = $('.deleteButton');
-  addIdeaToPage(ideaTitle, ideaBody, deleteButton);
+  var ideaQuality = $('.idea-quality').val();
+  addIdeaToPage(ideaTitle, ideaBody, ideaQuality);
   saveIdeaList();
   clearInputFields();
 });
@@ -79,9 +80,20 @@ $('.ideaList').on('click', '.deleteButton', function(){
  //event listener up button
  $('.ideaList').on('click', '.up-arrow', function(){
    if ($(this).parent().children('.idea-quality').text() === 'swill') {
+     $(this).parent().children('.idea-quality').text('plausible');
+   }
+   else if ($(this).parent().children('.idea-quality').text() === 'plausible') {
+       $(this).parent().children('.idea-quality').text('genius');
+       }
+  saveIdeaList();
+ });
+
+ //event listener down button
+ $('.ideaList').on('click', '.down-arrow', function(){
+   if ($(this).parent().children('.idea-quality').text() === 'genius') {
      $('.idea-quality').text('plausible');
    }
    else if ($(this).parent().children('.idea-quality').text() === 'plausible') {
-       $('.idea-quality').text('genius');
+       $('.idea-quality').text('swill');
        }
  });
