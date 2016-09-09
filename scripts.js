@@ -25,7 +25,7 @@ function renderIdeasInArray() {
     var idea = new Idea(idea.title, idea.body, idea.id, idea.quality);
     idea.renderOnPage();
   });
-};
+}
 
 //renders ideas in array on page load
 renderIdeasInArray();
@@ -56,8 +56,7 @@ function clearInputFields(){
 $('#save-btn').on('click', function() {
   var ideaTitle = $('#title-input').val();
   var ideaBody = $('#body-input').val();
-  var ideaQuality = $('.idea-quality').val();
-  addIdeaToPage(ideaTitle, ideaBody, ideaQuality);
+  addIdeaToPage(ideaTitle, ideaBody);
   saveIdeaList();
   clearInputFields();
 });
@@ -79,13 +78,14 @@ $('.ideaList').on('click', '.deleteButton', function(){
 
  //event listener up button
  $('.ideaList').on('click', '.up-arrow', function(){
+   var ideaQuality = $(this).parent().attr('quality');
+
    if ($(this).parent().children('.idea-quality').text() === 'swill') {
      $(this).parent().children('.idea-quality').text('plausible');
    }
    else if ($(this).parent().children('.idea-quality').text() === 'plausible') {
        $(this).parent().children('.idea-quality').text('genius');
        }
-  saveIdeaList();
  });
 
  //event listener down button
