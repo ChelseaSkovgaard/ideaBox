@@ -17,7 +17,8 @@ function Idea (title, body, id, quality) {
 }
 
 Idea.prototype.renderOnPage = function() {
-  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button class="deleteButton">delete</button><p class="ideaBody">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">'+ this.quality + '</p></div>');
+  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button class="deleteButton">delete</button><p class="ideaBody">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">' + this.quality + '</p></div>');
+
 };
 
 function renderIdeasInArray() {
@@ -30,8 +31,8 @@ function renderIdeasInArray() {
 renderIdeasInArray();
 //renders ideas in array on page load
 
-function addIdeaToPage(ideaTitle, ideaBody) {
-  var idea = new Idea(ideaTitle, ideaBody);
+function addIdeaToPage(ideaTitle, ideaBody, ideaQuality) {
+  var idea = new Idea(ideaTitle, ideaBody, ideaQuality);
   ideaList.push(idea);
   idea.renderOnPage();
 }
@@ -76,8 +77,7 @@ function clearInputFields(){
 $('#save-btn').on('click', function() {
   var ideaTitle = $('#title-input').val();
   var ideaBody = $('#body-input').val();
-  var deleteButton = $('.deleteButton');
-  addIdeaToPage(ideaTitle, ideaBody, deleteButton);
+  addIdeaToPage(ideaTitle, ideaBody);
   saveIdeaList();
   clearInputFields();
 });
@@ -99,8 +99,22 @@ $('.ideaList').on('click', '.deleteButton', function(){
 
  //event listener up button
  $('.ideaList').on('click', '.up-arrow', function(){
-   debugger
-   if ($(this).parent().idea-quality.text === 'swill') {
-     $('.idea-quality').innerText('plausible');
+   var ideaQuality = $(this).parent().attr('quality');
+
+   if ($(this).parent().children('.idea-quality').text() === 'swill') {
+     $(this).parent().children('.idea-quality').text('plausible');
    }
+   else if ($(this).parent().children('.idea-quality').text() === 'plausible') {
+       $(this).parent().children('.idea-quality').text('genius');
+       }
+ });
+
+ //event listener down button
+ $('.ideaList').on('click', '.down-arrow', function(){
+   if ($(this).parent().children('.idea-quality').text() === 'genius') {
+     $('.idea-quality').text('plausible');
+   }
+   else if ($(this).parent().children('.idea-quality').text() === 'plausible') {
+       $('.idea-quality').text('swill');
+       }
  });
