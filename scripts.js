@@ -21,7 +21,7 @@ function Idea (title, body, id, quality) {
 
 //constructor function to render idea on page with specified object qualities
 Idea.prototype.renderOnPage = function() {
-  $('.idea-list').prepend('<div id=' + this.id + ' class="container"><h2 contenteditable=true class="idea-title">' + this.title + '</h2><button class="delete-button">delete</button><p contenteditable=true class="idea-body">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">quality: ' + this.quality + '</p></div>');
+  $('.idea-list').prepend('<div id=' + this.id + ' class="container"><h2 contenteditable=true class="idea-title">' + this.title + '</h2><button class="delete-button"></button><p contenteditable=true class="idea-body">' + this.body + '</p><button class="up-arrow"></button><button class="down-arrow"></button><p class="idea-quality">quality: ' + this.quality + '</p></div>');
 
 };
 
@@ -35,7 +35,6 @@ function renderIdeasInArray() {
 
 //renders ideas in array on page load
 renderIdeasInArray();
-
 
 function addIdeaToPage(ideaTitle, ideaBody, ideaQuality) {
   var idea = new Idea(ideaTitle, ideaBody, ideaQuality);
@@ -96,8 +95,7 @@ $('.idea-list').on('click', '.delete-button', function(){
     var id = parseInt($(this).parent().attr('id'));
     var ideaId = findIdea(id).id;
     var quality = $(this).siblings().closest('.idea-quality').text();
-    var idea = findIdea(id)
-
+    var idea = findIdea(id);
 
     if (id === ideaId && quality === 'quality: swill') {
       $(this).siblings().closest('.idea-quality').text('quality: plausible');
@@ -106,7 +104,7 @@ $('.idea-list').on('click', '.delete-button', function(){
     } else if (id === ideaId && quality === 'quality: plausible') {
       $(this).siblings().closest('.idea-quality').text('quality: genius');
       idea.quality = 'genius';
-    };
+    }
     saveIdeaList();
   });
 
@@ -126,7 +124,7 @@ $('.idea-list').on('click', '.down-arrow', function(){
   } else if (id === ideaId && quality === 'quality: genius') {
     $(this).siblings().closest('.idea-quality').text('quality: plausible');
     idea.quality = 'plausible';
-  };
+  }
   saveIdeaList();
 });
 
@@ -134,7 +132,7 @@ $('.idea-list').on('click', '.down-arrow', function(){
   function findIdea(id) {
    return ideaList.find(function(idea) {
       return idea.id === id;
-    })
+    });
   }
 
   //function to save idea if user edits title text field
@@ -164,9 +162,9 @@ $('#save-btn').attr('disabled', true);
 
 $('#title-input').on('keyup', function () {
 
-  if($(this).val().length != 0){
-    $('#save-btn').attr('disabled', false)
-  } else $('#save-btn').attr('disabled', true)
+  if($(this).val().length !== 0){
+    $('#save-btn').attr('disabled', false);
+  } else $('#save-btn').attr('disabled', true);
 });
 
 $('#save-btn').on('click', function() {
@@ -176,24 +174,24 @@ $('#save-btn').on('click', function() {
 /*if user types in search field, the list of ideas should be filtered on keyup to display their results. if there is nothing in this text field all of the ideas should still be on the page*/
 
 //function for keyup on search input
-$('#search-input').on('keyup', function() {
-  // var searchInput = $(this).text();
-  var filter = $(this).val();
-  debugger
-  if (filter.length != 0) {
-
-    // filterIdeas();
-    // addIdeaToPage();
-  } else (
-    renderIdeasInArray();
-  )
-});
-
-//function to filter through ideas based on text in search input
-function filterIdeas (ideas) {
-  debugger
-  ideaList = ideaList.filter(function(ideas) {
-    debugger
-    return ideas.text !== $('#search-input').text();
-  });
-}
+// $('#search-input').on('keyup', function() {
+//   // var searchInput = $(this).text();
+//   var filter = $(this).val();
+//   debugger
+//   if (filter.length != 0) {
+//
+//     // filterIdeas();
+//     // addIdeaToPage();
+//   } else (
+//     renderIdeasInArray();
+//   )
+// });
+//
+// //function to filter through ideas based on text in search input
+// function filterIdeas (ideas) {
+//   debugger
+//   ideaList = ideaList.filter(function(ideas) {
+//     debugger
+//     return ideas.text !== $('#search-input').text();
+//   });
+// }
