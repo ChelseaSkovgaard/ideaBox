@@ -99,12 +99,12 @@ $('.idea-list').on('click', '.delete-button', function(){
     var idea = findIdea(id)
 
 
-    if (id === ideaId && quality === 'swill') {
-      $(this).siblings().closest('.idea-quality').text('plausible');
+    if (id === ideaId && quality === 'quality: swill') {
+      $(this).siblings().closest('.idea-quality').text('quality: plausible');
       idea.quality = 'plausible';
 
-    } else if (id === ideaId && quality === 'plausible') {
-      $(this).siblings().closest('.idea-quality').text('genius');
+    } else if (id === ideaId && quality === 'quality: plausible') {
+      $(this).siblings().closest('.idea-quality').text('quality: genius');
       idea.quality = 'genius';
     };
     saveIdeaList();
@@ -112,18 +112,19 @@ $('.idea-list').on('click', '.delete-button', function(){
 
 //down arrow click event
 $('.idea-list').on('click', '.down-arrow', function(){
+  debugger
   var id = parseInt($(this).parent().attr('id'));
   var ideaId = findIdea(id).id;
   var quality = $(this).siblings().closest('.idea-quality').text();
   var idea = findIdea(id);
 
 
-  if (id === ideaId && quality === 'plausible') {
-    $(this).siblings().closest('.idea-quality').text('swill');
+  if (id === ideaId && quality === 'quality: plausible') {
+    $(this).siblings().closest('.idea-quality').text('quality: swill');
     idea.quality = 'swill';
 
-  } else if (id === ideaId && quality === 'genius') {
-    $(this).siblings().closest('.idea-quality').text('plausible');
+  } else if (id === ideaId && quality === 'quality: genius') {
+    $(this).siblings().closest('.idea-quality').text('quality: plausible');
     idea.quality = 'plausible';
   };
   saveIdeaList();
@@ -162,7 +163,7 @@ $('.idea-list').on('click', '.down-arrow', function(){
 $('#save-btn').attr('disabled', true);
 
 $('#title-input').on('keyup', function () {
-  debugger
+
   if($(this).val().length != 0){
     $('#save-btn').attr('disabled', false)
   } else $('#save-btn').attr('disabled', true)
@@ -170,7 +171,6 @@ $('#title-input').on('keyup', function () {
 
 $('#save-btn').on('click', function() {
   $(this).attr('disabled', true);
-})
+});
 
-
-  //function to disable up and down arrows if there is no more up or down values
+/*if user types in search field, the list of ideas should be filtered on keyup to display their results. if there is nothing in this text field all of the ideas should still be on the page*/
