@@ -7,8 +7,10 @@ title and body text need to go into local storage
 title and body input fields are cleared
 page should not reload when input fields are cleared*/
 
+//global array of list ideas
 var ideaList = getIdeaList() || [];
 
+//idea object
 function Idea (title, body, id, quality) {
   this.title = title;
   this.body = body;
@@ -16,11 +18,14 @@ function Idea (title, body, id, quality) {
   this.quality = quality || 'swill';
 }
 
+
+//constructor function to render idea on page with specified object qualities
 Idea.prototype.renderOnPage = function() {
-  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button class="deleteButton">delete</button><p class="ideaBody">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">' + this.quality + '</p></div>');
+  $('.idea-list').prepend('<div id=' + this.id + ' class="container"><h2 class="idea-title">' + this.title + '</h2><button class="delete-button">delete</button><p class="idea-body">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">' + this.quality + '</p></div>');
 
 };
 
+//function to render ideas in th array
 function renderIdeasInArray() {
   ideaList.forEach(function(idea) {
     // var idea = new Idea(idea.title, idea.body, idea.id);
@@ -28,8 +33,9 @@ function renderIdeasInArray() {
   });
 }
 
-renderIdeasInArray();
 //renders ideas in array on page load
+renderIdeasInArray();
+
 
 function addIdeaToPage(ideaTitle, ideaBody, ideaQuality) {
   var idea = new Idea(ideaTitle, ideaBody, ideaQuality);
@@ -52,8 +58,7 @@ function getIdeaList() {
   }
 }
 
-
-
+//function to clear input fields
 function clearInputFields(){
   $('#title-input').val('');
   $('#body-input').val('');
@@ -63,18 +68,20 @@ function clearInputFields(){
 $('#save-btn').on('click', function() {
   var ideaTitle = $('#title-input').val();
   var ideaBody = $('#body-input').val();
+
   addIdeaToPage(ideaTitle, ideaBody);
   saveIdeaList();
   clearInputFields();
 });
 
 //event listener delete button
-$('.ideaList').on('click', '.deleteButton', function(){
+$('.ideaList').on('click', '.delete-button', function(){
     var ideaId = $(this).parent().attr('id');
     removeFromStorage(ideaId);
    $(this).parent().remove();
  });
 
+//removes item in array from local storage
  function removeFromStorage(id) {
    id = parseInt(id);
     ideaList = ideaList.filter(function(i) {
@@ -84,21 +91,44 @@ $('.ideaList').on('click', '.deleteButton', function(){
  }
 
 
- //up arrow event listener
-  $('.ideaList').on('click', '.up-arrow', function(){
+ //up arrow click event
+  $('.idea-list').on('click', '.up-arrow', function(){
     var id = parseInt($(this).parent().attr('id'));
-    debugger
-    // var ideaQuality = ideaList[0];
-    var idea = findIdea(id).id;
+    var ideaId = findIdea(id).id;
     var quality = $(this).siblings().closest('.idea-quality').text();
+    var idea = findIdea(id)
 
-    if (id === idea && quality === 'swill') {
-      debugger
+    debugger
+
+    if (id === ideaId && quality === 'swill') {
       $(this).siblings().closest('.idea-quality').text('plausible');
+      idea.quality = 'plausible';
 
+    } else if (id === ideaId && quality === 'plausible') {
+      $(this).siblings().closest('.idea-quality').text('genius');
+      idea.quality = 'genius';
     };
     saveIdeaList();
   });
+
+//down arrow click event
+$('.idea-list').on('click', '.down-arrow', function(){
+  var id = parseInt($(this).parent().attr('id'));
+  var ideaId = findIdea(id).id;
+  var quality = $(this).siblings().closest('.idea-quality').text();
+  var idea = findIdea(id)
+
+
+  if (id === ideaId && quality === 'plausible') {
+    $(this).siblings().closest('.idea-quality').text('swill');
+    idea.quality = 'swill';
+
+  } else if (id === ideaId && quality === 'genius') {
+    $(this).siblings().closest('.idea-quality').text('plausible');
+    idea.quality = 'plausible';
+  };
+  saveIdeaList();
+});
 
 //function to return the id of a particular idea in array
   function findIdea(id) {
