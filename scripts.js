@@ -37,7 +37,6 @@ function addIdeaToPage(ideaTitle, ideaBody, ideaQuality) {
   idea.renderOnPage();
 }
 
-
 //function to save item in local storage
 function saveIdeaList() {
   localStorage.setItem('ideaKey', JSON.stringify(ideaList));
@@ -53,20 +52,7 @@ function getIdeaList() {
   }
 }
 
-$('.ideaList').on('click', '.up-arrow', function(e){
-  debugger
-   var id = $(this).parent().attr('id');
-   var ideaQuality = $(this).parent().children('.idea-quality')
 
-  //  ideaList.find(id).levelUp();
-   if (id === 'id' && ideaQuality === 'swill') {
-     ideaQuality.text('plausible');
-   }
-   else if (id === 'id' && ideaQuality === 'plausible') {
-       ideaQuality.text('genius');
-       }
-   saveIdeaList()
- });
 
 function clearInputFields(){
   $('#title-input').val('');
@@ -97,24 +83,25 @@ $('.ideaList').on('click', '.deleteButton', function(){
     saveIdeaList();
  }
 
- //event listener up button
- $('.ideaList').on('click', '.up-arrow', function(){
-   var ideaQuality = $(this).parent().attr('quality');
 
-   if ($(this).parent().children('.idea-quality').text() === 'swill') {
-     $(this).parent().children('.idea-quality').text('plausible');
-   }
-   else if ($(this).parent().children('.idea-quality').text() === 'plausible') {
-       $(this).parent().children('.idea-quality').text('genius');
-       }
- });
+ //up arrow event listener
+  $('.ideaList').on('click', '.up-arrow', function(){
+    debugger
+    var id = parseInt($(this).parent().attr('id'));
+    var ideaId = ideaList[0].id;
+    var ideaQuality = ideaList[0];
+    var idea = findIdea(id);
+    debugger
+    //  ideaList.find(id).levelUp();
+    if (id === ideaId && ideaQuality.quality === 'swill') {
+      arrayQuality.quality = 'plausible';
 
- //event listener down button
- $('.ideaList').on('click', '.down-arrow', function(){
-   if ($(this).parent().children('.idea-quality').text() === 'genius') {
-     $('.idea-quality').text('plausible');
-   }
-   else if ($(this).parent().children('.idea-quality').text() === 'plausible') {
-       $('.idea-quality').text('swill');
-       }
- });
+    };
+    saveIdeaList();
+  });
+
+  function findIdea(id) {
+   return ideaList.find(function(idea) {
+      return idea.id === id;
+    })
+  }
