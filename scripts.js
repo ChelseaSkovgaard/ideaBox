@@ -171,6 +171,19 @@ $('#save-btn').on('click', function() {
   $(this).attr('disabled', true);
 });
 
+
+$('#search-input').on('keyup', function(){
+    var filter = $(this).val();
+    $('.container').each(function(){
+      if($(this).text().search(new RegExp(filter, 'i')) < 0) {
+        $(this).fadeOut();
+      }
+      else {
+        $(this).fadeIn();
+      }
+    });
+});
+
 /*if user types in search field, the list of ideas should be filtered on keyup to display their results. if there is nothing in this text field all of the ideas should still be on the page*/
 
 //function for keyup on search input
