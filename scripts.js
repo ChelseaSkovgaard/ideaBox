@@ -21,7 +21,7 @@ function Idea (title, body, id, quality) {
 
 //constructor function to render idea on page with specified object qualities
 Idea.prototype.renderOnPage = function() {
-  $('.idea-list').prepend('<div id=' + this.id + ' class="container"><h2 contenteditable=true class="idea-title">' + this.title + '</h2><button class="delete-button">delete</button><p contenteditable=true class="idea-body">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">' + this.quality + '</p></div>');
+  $('.idea-list').prepend('<div id=' + this.id + ' class="container"><h2 contenteditable=true class="idea-title">' + this.title + '</h2><button class="delete-button">delete</button><p contenteditable=true class="idea-body">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">quality: ' + this.quality + '</p></div>');
 
 };
 
@@ -136,7 +136,7 @@ $('.idea-list').on('click', '.down-arrow', function(){
     })
   }
 
-  //function to save idea if user edits text field
+  //function to save idea if user edits title text field
   /*need to take edited html input and pass it into the object property and save to local storage on keyup*/
   $('.idea-list').on('keyup', '.idea-title', function() {
 
@@ -148,6 +148,21 @@ $('.idea-list').on('click', '.down-arrow', function(){
     saveIdeaList();
   });
 
+  $('.idea-list').on('keyup', '.idea-body', function() {
+
+    var id = parseInt($(this).parent().attr('id'));
+    var newBody = $(this).text();
+    var idea = findIdea(id);
+
+    idea.body = newBody;
+    saveIdeaList();
+  });
+
   //function to disable save button if there's nothing in the text field
+  if ($('.title-input') === '' || $('.body-input') === '') {
+    debugger
+    $('#save-btn').prop('disabled', true);
+  }
+
 
   //function to disable up and down arrows if there is no more up or down values
