@@ -24,10 +24,25 @@ h1 {
 h1 span {
   color: #00A79D;
 }
+header div {
+  width: 100vw;
+  text-align: center;
+}
+#title-input {
+  width: 500px;
+  margin-bottom: 10px;
+}
+#body-input {
+  width: 500px;
+  margin-bottom: 10px;
+}
 
 #save-btn {
   background-color: #00A79D;
   color: #FFFFFF;
+  border-style: none;
+  width: 500px;
+  margin-bottom: 15px;
 }
 
 #save-btn:hover {
