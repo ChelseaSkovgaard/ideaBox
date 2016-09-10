@@ -98,7 +98,6 @@ $('.idea-list').on('click', '.delete-button', function(){
     var quality = $(this).siblings().closest('.idea-quality').text();
     var idea = findIdea(id)
 
-    debugger
 
     if (id === ideaId && quality === 'swill') {
       $(this).siblings().closest('.idea-quality').text('plausible');
@@ -116,7 +115,7 @@ $('.idea-list').on('click', '.down-arrow', function(){
   var id = parseInt($(this).parent().attr('id'));
   var ideaId = findIdea(id).id;
   var quality = $(this).siblings().closest('.idea-quality').text();
-  var idea = findIdea(id)
+  var idea = findIdea(id);
 
 
   if (id === ideaId && quality === 'plausible') {
@@ -137,7 +136,17 @@ $('.idea-list').on('click', '.down-arrow', function(){
     })
   }
 
-  //function to save idea if user edits
+  //function to save idea if user edits text field
+  /*need to take edited html input and pass it into the object property and save to local storage on keyup*/
+  $('.idea-list').on('keyup', '.idea-title', function() {
+
+    var id = parseInt($(this).parent().attr('id'));
+    var newTitle = $(this).text();
+    var idea = findIdea(id);
+
+    idea.title = newTitle;
+    saveIdeaList();
+  });
 
   //function to disable save button if there's nothing in the text field
 
