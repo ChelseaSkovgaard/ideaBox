@@ -28,7 +28,7 @@ Idea.prototype.renderOnPage = function() {
 //function to render ideas in th array
 function renderIdeasInArray() {
   ideaList.forEach(function(idea) {
-    // var idea = new Idea(idea.title, idea.body, idea.id);
+
     idea.renderOnPage();
   });
 }
@@ -174,3 +174,26 @@ $('#save-btn').on('click', function() {
 });
 
 /*if user types in search field, the list of ideas should be filtered on keyup to display their results. if there is nothing in this text field all of the ideas should still be on the page*/
+
+//function for keyup on search input
+$('#search-input').on('keyup', function() {
+  // var searchInput = $(this).text();
+  var filter = $(this).val();
+  debugger
+  if (filter.length != 0) {
+
+    // filterIdeas();
+    // addIdeaToPage();
+  } else (
+    renderIdeasInArray();
+  )
+});
+
+//function to filter through ideas based on text in search input
+function filterIdeas (ideas) {
+  debugger
+  ideaList = ideaList.filter(function(ideas) {
+    debugger
+    return ideas.text !== $('#search-input').text();
+  });
+}
