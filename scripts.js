@@ -86,20 +86,21 @@ $('.ideaList').on('click', '.deleteButton', function(){
 
  //up arrow event listener
   $('.ideaList').on('click', '.up-arrow', function(){
-    debugger
     var id = parseInt($(this).parent().attr('id'));
-    var ideaId = ideaList[0].id;
-    var ideaQuality = ideaList[0];
-    var idea = findIdea(id);
     debugger
-    //  ideaList.find(id).levelUp();
-    if (id === ideaId && ideaQuality.quality === 'swill') {
-      arrayQuality.quality = 'plausible';
+    // var ideaQuality = ideaList[0];
+    var idea = findIdea(id).id;
+    var quality = $(this).siblings().closest('.idea-quality').text();
+
+    if (id === idea && quality === 'swill') {
+      debugger
+      $(this).siblings().closest('.idea-quality').text('plausible');
 
     };
     saveIdeaList();
   });
 
+//function to return the id of a particular idea in array
   function findIdea(id) {
    return ideaList.find(function(idea) {
       return idea.id === id;
