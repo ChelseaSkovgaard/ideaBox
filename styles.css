@@ -58,6 +58,10 @@ header {
   color: #FFFFFF;
 }
 
+#save-btn:disabled {
+  background-color: #efefef;
+}
+
 .ideaList {
   width: 100vw;
 }
