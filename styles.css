@@ -1,0 +1,36 @@
+
+header {
+  font-family: 'Roboto Slab', serif;
+  background-color: #E5F3F2;
+  font-weight: bold;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100vw;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  color: #6D6E71;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 25px;
+  width: 100vw;
+}
+
+h1 span {
+  color: #00A79D;
+}
+
+#save-btn {
+  background-color: #00A79D;
+  color: #FFFFFF;
+}
+
+#save-btn:hover {
+  background-color: #045E55;
+  color: #FFFFFF;
+}
