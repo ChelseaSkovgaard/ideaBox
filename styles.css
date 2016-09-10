@@ -7,6 +7,7 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   width: 100vw;
+  padding-top: 20px;
 }
 
 body {
@@ -42,6 +43,7 @@ header div {
   color: #FFFFFF;
   border-style: none;
   width: 500px;
+  height: 20px;
   margin-bottom: 15px;
 }
 
@@ -49,3 +51,57 @@ header div {
   background-color: #045E55;
   color: #FFFFFF;
 }
+
+section {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100vw;
+  padding-top: 20px;
+}
+
+div #input {
+  width: 100vw;
+}
+
+div.ideaList {
+  width: 100vw;
+}
+
+#search-input {
+  width: 500px;
+}
+
+.container {
+  margin:auto;
+  width: 500px;
+  padding-top: 20px;
+  border-bottom: solid 2px #D1D3D4;
+}
+
+.idea-title {
+  color: #6D6E71;
+  font-size: 18px;
+  text-align: left;
+  display: inline-block;
+}
+.delete-button {
+  background-image: url("images/delete.svg");
+  background-color: #FFFFFF;
+  border: none;
+  width: 20px;
+  height: 20px;
+  float:right;
+}
+
+.idea-body {
+  color: #939598;
+  font-size: 14px;
+  text-align: left;
+}
+
+.idea-quality {
+  color: #6D6E71;
+  font-size: 12px;
+}
+/* images for url - buttons

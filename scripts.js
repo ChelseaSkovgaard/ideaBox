@@ -17,7 +17,7 @@ function Idea (title, body, id, quality) {
 }
 
 Idea.prototype.renderOnPage = function() {
-  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="ideaTitle">' + this.title + '</h2><button class="deleteButton">delete</button><p class="ideaBody">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">' + this.quality + '</p></div>');
+  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="idea-title">' + this.title + '</h2><button class="delete-button"></button><p class="idea-body">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">' + 'quality:' + this.quality + '</p></div>');
 
 };
 
