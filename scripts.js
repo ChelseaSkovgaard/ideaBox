@@ -13,11 +13,11 @@ function Idea (title, body, id, quality) {
   this.title = title;
   this.body = body;
   this.id = id || Date.now();
-  this.quality = quality || 'swill';
+  this.quality = quality || 'quality: swill';
 }
 
 Idea.prototype.renderOnPage = function() {
-  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="idea-title">' + this.title + '</h2><button class="delete-button"></button><p class="idea-body">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">' + 'quality:' + this.quality + '</p></div>');
+  $('.ideaList').prepend('<div id=' + this.id + ' class="container"><h2 class="idea-title">' + this.title + '</h2><button class="delete-button"></button><p class="idea-body">' + this.body + '</p><button class="up-arrow"></button><button class="down-arrow"></button><p class="idea-quality">' + this.quality + '</p></div>');
 
 };
 

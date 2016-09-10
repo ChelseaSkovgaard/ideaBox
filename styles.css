@@ -84,6 +84,7 @@ div.ideaList {
   font-size: 18px;
   text-align: left;
   display: inline-block;
+  margin-bottom: 10px;
 }
 .delete-button {
   background-image: url("images/delete.svg");
@@ -94,14 +95,61 @@ div.ideaList {
   float:right;
 }
 
+.delete-button:hover {
+  background-image: url("images/delete-hover.svg");
+  background-color: #FFFFFF;
+  border: none;
+  width: 20px;
+  height: 20px;
+  float: right;
+}
+
 .idea-body {
   color: #939598;
   font-size: 14px;
   text-align: left;
+  margin-bottom: 10px;
 }
 
 .idea-quality {
   color: #6D6E71;
   font-size: 12px;
+  display: inline-block;
+  margin-left: 15px;
+  margin-bottom: 20px;
 }
-/* images for url - buttons
+
+.up-arrow {
+  background-image: url("images/upvote.svg");
+  background-color: #FFFFFF;
+  border: none;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+.up-arrow:hover {
+  background-image: url("images/upvote-hover.svg");
+  background-color: #FFFFFF;
+  border: none;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+.down-arrow {
+  background-image: url("images/downvote.svg");
+  background-color: #FFFFFF;
+  border: none;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+.down-arrow:hover {
+  background-image: url("images/downvote-hover.svg");
+  background-color: #FFFFFF;
+  border: none;
+  width: 20px;
+  height: 20px;
+}
