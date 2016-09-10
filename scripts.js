@@ -159,10 +159,18 @@ $('.idea-list').on('click', '.down-arrow', function(){
   });
 
   //function to disable save button if there's nothing in the text field
-  if ($('.title-input') === '' || $('.body-input') === '') {
-    debugger
-    $('#save-btn').prop('disabled', true);
-  }
+$('#save-btn').attr('disabled', true);
+
+$('#title-input').on('keyup', function () {
+  debugger
+  if($(this).val().length != 0){
+    $('#save-btn').attr('disabled', false)
+  } else $('#save-btn').attr('disabled', true)
+});
+
+$('#save-btn').on('click', function() {
+  $(this).attr('disabled', true);
+})
 
 
   //function to disable up and down arrows if there is no more up or down values
