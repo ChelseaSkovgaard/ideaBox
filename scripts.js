@@ -21,7 +21,7 @@ function Idea (title, body, id, quality) {
 
 //constructor function to render idea on page with specified object qualities
 Idea.prototype.renderOnPage = function() {
-  $('.idea-list').prepend('<div id=' + this.id + ' class="container"><h2 class="idea-title">' + this.title + '</h2><button class="delete-button">delete</button><p class="idea-body">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">' + this.quality + '</p></div>');
+  $('.idea-list').prepend('<div id=' + this.id + ' class="container"><h2 contenteditable=true class="idea-title">' + this.title + '</h2><button class="delete-button">delete</button><p contenteditable=true class="idea-body">' + this.body + '</p><button class="up-arrow">uparrow</button><button class="down-arrow">downarrow</button><p class="idea-quality">' + this.quality + '</p></div>');
 
 };
 
@@ -75,7 +75,7 @@ $('#save-btn').on('click', function() {
 });
 
 //event listener delete button
-$('.ideaList').on('click', '.delete-button', function(){
+$('.idea-list').on('click', '.delete-button', function(){
     var ideaId = $(this).parent().attr('id');
     removeFromStorage(ideaId);
    $(this).parent().remove();
@@ -136,3 +136,9 @@ $('.idea-list').on('click', '.down-arrow', function(){
       return idea.id === id;
     })
   }
+
+  //function to save idea if user edits
+
+  //function to disable save button if there's nothing in the text field
+
+  //function to disable up and down arrows if there is no more up or down values
